@@ -1,7 +1,7 @@
 Compile:
 # install chicken scheme
   $ sudo apt-get install chicken
-  $ csc emebed.c abc.ck.scm
+  $ csc -embedded emebed.c abc.ck.scm -lreadline
 
 Exec:
   $ ./abc.ck
