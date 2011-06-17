@@ -1,0 +1,21 @@
+(define (input description)
+  (display description (standard-error-port))
+  (display "> " (standard-error-port))
+  (flush)
+  (with-input-from-string (read-line)
+    (cut port-map identity read)))
+
+(define (main args)
+  (let loop ((i (input "test")))
+    (case (car i)
+      ((exit quit q) (exit))
+      ((new make create n) (apply make-object (cdr i)))
+      ((delete d x) (delete-object i))
+      ((add a) (link-object i))
+      ((inspect i) (inspect-object i)))
+     (loop (input "test"))))
+
+(define objects '())
+
+(define (make-object name)
+  (push! objects (name (list  name))))

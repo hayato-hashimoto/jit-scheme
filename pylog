@@ -1,0 +1,2002 @@
+Traceback (most recent call last):
+  File "benchmark.py", line 14, in <module>
+    print (loop(8));
+  File "benchmark.py", line 10, in loop
+    calc();
+  File "benchmark.py", line 7, in calc
+    l, 200000, 1);
+  File "benchmark.py", line 6, in <lambda>
+    return (lambda a, b, c: a(a, b, c)) (
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 3, in l
+    else : return cont(cont, arg1 - 1, arg1 + arg2)
+  File "benchmark.py", line 2, in l
+    if (arg1 == 0): return arg2
+RuntimeError: maximum recursion depth exceeded in comparison
