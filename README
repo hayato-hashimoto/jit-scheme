@@ -1,0 +1,21 @@
+:Dependency:
+ Chicken scheme
+  $ apt-get install chicken
+ Chicken eggs: matchable
+  $ chicken-install matchable
+
+:Compile:
+  $ make
+
+:Exec:
+  $ ./jitscheme
+
+:Example:
+:infinite loop: (Omega Combinator)
+  test> ((lambda (a) (a a)) (lambda (a) (a a)))
+
+# The examples below does NOT work right now.
+:fibonacci numbers:
+ test> (fn (fib)
+   (set! fib (fn (n) (if (< n 1) 1 (+ (fib (- n 1)) (fib (- n 2))))))
+   (fib 10))
