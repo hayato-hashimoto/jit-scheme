@@ -1,9 +1,0 @@
-(use gauche.sequence)
-(define (relate inlist outlist)
-  (lambda (in)
-    (if (= (length inlist) (length in))
-      (map 
-        (lambda (x) (let1 i (find-index (pa$ eq? x) inlist)
-          (if i (list-ref in i) x)))
-        outlist)
-      (error "arity unmatched."))))
