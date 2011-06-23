@@ -1,0 +1,25 @@
+Compile:
+# install chicken scheme
+  $ sudo apt-get install chicken
+  $ csc -embedded emebed.c abc.ck.scm -lreadline
+
+Exec:
+  $ ./abc.ck
+
+
+
+Example:
+:fibonacci numbers:
+(なぜか無限ループになるバグがある)
+(このコードは一見難しそうだが、普通のコードから簡単な変換で作成できる)
+(作成中のクロージャ機能ができればもっと普通にかける)
+((lambda (c n) (if (= n 0) 1 (if (= n 1) 1 (+ (c c (+ n -1)) (c c (+ n -2))))))
+ (lambda (c n) (if (= n 0) 1 (if (= n 1) 1 (+ (c c (+ n -1)) (c c (+ n -2)))))) 10)
+
+
+:infinite loop: (Omega Combinator)
+  > ((lambda (a) (a a)) (lambda (a) (a a)))
+  hook
+  hook
+  hook
+  ...
