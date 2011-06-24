@@ -69,11 +69,18 @@
   (norex-instruction/subcode '(#xFF) #x02 dest))
 
 (define (p x) x)
+(define (px x) x)
 (define (opadd dest src)
   (cond
     ((integer? src) `(,@(instruction/subcode '(#x81) #x00 dest) ,@(enc 8 4 src)))
     ((pair? dest)   (instruction '(#x01) src dest))
     (else           (instruction '(#x03) dest src))))
+
+(define (opcmp dest src)
+  (cond
+    ((integer? src) `(,@(instruction/subcode '(#x81) #x07 dest) ,@(enc 8 4 src)))
+    ((pair? dest)   (instruction '(#x39) src dest))
+    (else           (instruction '(#x3B) dest src))))
 
 (define (opsub dest src)
   (cond
@@ -81,12 +88,16 @@
     ((pair? dest)   (instruction '(#x29) src dest))
     (else           (instruction '(#x2b) dest src))))
 
-(define (label? a)
+(define (label-symbol? a)
   (and (pair? a) (pair? (cdr a)) (eq? (cddr a) 'label)))
+(define (rel-label-symbol? a)
+  (and (pair? a) (pair? (cdr a)) (eq? (cddr a) 'rel-label)))
+(define (label? a)
+  (and (pair? a) (pair? (car a)) (eq? (caar a) 'label)))
 
 (define (opmov dest src)
   (cond
-    ((label? src)   `(,@(rex-prefix 0 0) ,(logior #xB8 (regi dest)) ,src))
+    ((label-symbol? src)   `(,@(rex-prefix 0 0) ,(logior #xB8 (regi dest)) ,src))
     ((integer? src) `(,@(instruction/subcode '(#xC7) 0 dest) ,@(enc 8 4 src)))
     ((pair? dest) (instruction '(#x89) src dest))
     (else (instruction '(#x8B) dest src))))
@@ -193,194 +204,9 @@
     (or (list-index (cut eq? regsym <>) registers32)
         (list-index (cut eq? regsym <>) registers64)))
 
-(define (machine-code x)
-  `((builtin (machine-code ,(map opcode-filter x)) ,(lambda _ x))))
-
-(define (malloc n)
-  (riopadd 'rsi n))
-
-(define (pair a b)
-  (riopadd64 'rsi n)
-  (rsopmov64 b 'rsi)
-  (rsopmov64 a 'rsi))
-
-
-; register-in register-out instructions
-(define (ropadd64 r1 r2)
-  `(#x48 #x01 ,(logior #xc0 (regi r1) (ash (regi r2) 3))))
-
-(define (ropstore64 r1 r2)
-  `(#x48 #x89 ,(logior (regi r1) (ash (regi r2) 3))))
-
-(define (ropread64 r1 r2)
-  `(#x48 #x8b ,(logior (regi r2) (ash (regi r1) 3))))
-
-(define (ropconst64 r1 i1)
-  `(#x48 ,(logior #xB8 (regi r1)) ,@(enc 8 8 i1)))
-
-(define (ropimul64 r1 r2)
-  `(#x48 #x0F #xAF ,(logior #xC0 (regi r2) (ash (regi r1) 3))))
- 
-(define (ropcall64 r1)
-  `(#xFF ,(logior #xD0 (regi r1))))
-
-;mov rax, rdx
-(define (ropmov64)
-  '(#x48 #x89 #xD0))
-
-(define (riopadd8 r1 imm1)
-  `(#x48 #x83 ,(logior #xc0 (regi r1)) ,imm1))
-
-; immediate value jmp/call     
-(define (roprelcall32 i)
-  `(#xE8 ,@(enc 8 4 i)))
-
-(define (opje32 i)
-  `(#x0F #x84 ,@(enc 8 4 i)))
-
-(define (opjmp32 i)
-  `(#xE9 ,@(enc 8 4 i)))
-
-; stack-in register-out instructions
-(define (sopadd64 r1 idx1)
-  (cond
-    ((< #x-80 idx1 #x7f)
-     `(#x48 #x03 ,(logior #x44 (ash (regi r1) 3)) #x24 ,@(enc 8 1 idx1)))))
-
-(define (sopimul64 r1 idx1)
-  (cond
-    ((< #x-80 idx1 #x7f)
-      `(#x48 #x0F #xAF ,(logior #x44 (ash (regi r1) 3)) #x24 ,@(enc 8 1 idx1)))))
-
-(define (sopmov64 r1 idx1)
-  (cond
-    ((< #x-80 idx1 #x7f)
-      `(#x48 #x8B ,(logior #x44 (ash (regi r1) 3)) #x24 ,@(enc 8 1 idx1)))))
-
-(define (sopcmp64 r1 idx1)
-  (cond
-    ((< #x-80 idx1 #x7f)
-     `(#x48 #x3B ,(logior #x44 (ash (regi r1) 3)) #x24 ,@(enc 8 1 idx1)))))
-
-  ; emulation
-(define (sopread64 r1 idx1)
-  `(,@(sopmov64 r1 idx1)
-    ,@(ropread64 r1 r1)))
-
-(define (sopstore64 idx1 idx2)
-  `(,@(sopmov64 'rax idx1)
-    ,@(sopmov64 'rbx idx2)
-    ,@(ropstore64 'rax 'rbx)))
-
-(define (sopcall64 idx)
-  `(,@(sopmov64 'rax idx)
-    ,@(ropcall64 'rax)))
-
-; register-in stack-out instructions
-(define (rsopmov64 idx1 r1)
-  (cond
-    ((< #x-80 idx1 #x7f)
-      `(#x48 #x89 ,(logior #x44 (ash (regi r1) 3)) #x24 ,@(enc 8 1 idx1)))))
-
-(define (rspush r1)
-  `(,(logior #x50 (regi r1))))
-
 ; return
 (define (opret)
   '(#xc3))
-
-; add n to rsp
-(define (leave n)
-  (if (= n 0)
-   '()
-   `(#x48 #x83 #xC4 ,@(enc 8 1 n))))
-
-; substract n from rsp
-(define (frame n)
-  (if (= n 0)
-   '()
-   `(#x48 #x83 #xC4 ,@(enc 8 1 n))))
-
-; refer and load
-(define (lref n)
-  (sopmov64 'rax n))
-
-(define (const64 imm)
-  (ropconst64 'rax imm))
-
-(define (func-2-2-1 inst)
-  (lambda (idx)
-    (inst 'rax idx)))
-
-(define (func-2-1-1 inst)
-  (lambda (idx)
-    (inst 'rax idx)))
-
-(define add64   (func-2-2-1 sopadd64))
-(define imul64  (func-2-2-1 sopimul64))
-(define cmp64   (func-2-2-1 sopcmp64))
-(define store64 (func-2-2-1 sopstore64))
-(define read64  (cut ropread64 'rax 'rax))
-(define (values2 idx) (sopmov64 'rdx idx))
-(define push (cut rspush 'rax))
-
-(define ?number? number?)
-(define ?symbol? symbol?)
-(define (?procedure? l) (and (pair? l) (eq? (car l) 'lambda)))
-(define (?builtin? l) (and (pair? l) (eq? (car l) 'builtin)))
-(define (?syntax? l)  (and (pair? l) (eq? (car l) 'syntax)))
-(define (relocation-symbol value subst) `(relocation ,value ,subst))
-
-(define (size procs)
-  (map (lambda (p) (pre-code p)) procs))
-
-(define b-lref         `(builtin lref ,lref))
-(define b-push         `(builtin push ,push))
-(define b-lstore       `(builtin lstore ,(cut rsopmov64 <> 'rax)))
-(define b-call         `(builtin call   ,(cut ropcall64 'rax)))
-(define b-rel-call     `(builtin rel-call ,roprelcall32))
-(define b-if `(builtin if ,(lambda (proc1 proc2) `(,@(opje32 (relocation-symbol (lambda (i) 0) (lambda (i) ((relocation-proc -) proc1 (+ i 4))))) ,@(opjmp32 (relocation-symbol (lambda (i) 0) (lambda (i) ((relocation-proc -) proc2 (+ i 4)))))))))
-(define b-frame `(builtin frame ,frame))
-(define rel-call (lambda (i) `(,@(frame -8) #x48 #x89 #xC7 ,@(roprelcall32 i) ,@(leave 8))))
-
-(define (pre-code opcode)
-  (apply append (map (lambda (s)
-    (match s
-      (((proc . 'syntax) args ...)  (apply proc args)))) opcode)))
-
-(define (binary-compile s base-addr)
-  (let1 procs (code (compile s) base-addr)
-    (disp-inst procs)
-    (size procs)
-    (with-output-to-string 
-      (lambda ()
-        (dump-procs procs)))))
-
-(define (opcode-print procs)
-   (define (p s) (for-each (lambda (i) (for-each (lambda (x) (display "  ") (display x)) i) (newline)) (opcode-filter s)))
-   (for-each (lambda (x) (print "#<lambda addr=" (car x) ">") (p (cadr x)) (print "-----------------------")) procs))
-
-(define (dump-procs procs)
-  (define i 0)
-  (let loop ((p procs))
-    (when (not (null? p))
-      (for-each (lambda _ (write-byte #x90) (set! i (+ i 1))) (iota (- (car (car p)) i)))
-      (let loop2 ((seq (caddr (car p))))
-        (for-each (lambda (b)
-            (if (and (pair? b) b (eq? (car b) 'relocation))
-              (loop2 ((caddr b) i))
-              (begin (write-byte b) (set! i (+ i 1))))) seq))
-      (loop (cdr p)))))
-
-  (define (opcode-filter a)
-    (cond
-      ((not (pair? a)) a)
-      ((eq? 'frame-variable (car a)) (cadr a))
-      ((eq? 'builtin (car a)) (cadr a))
-      ((eq? 'relocation (car a)) "#<reloc>")
-      ((not (pair? (cdr a))) (map opcode-filter a))
-      ((eq? 'frame-variable (cadr a)) (caddr a) )
-      (else (map opcode-filter a))))
 
 (define (free-vars t) (free-vars% t '()))
 
@@ -424,10 +250,12 @@
             `((close . syntax)
               ,(map loop (filter (lambda (x) (any (cut eq? <> x) (free-vars s))) vars))
               (,(car p) . procedure))))
+      (('if p t f) `((if . syntax) ,(loop p) ,(loop t) ,(loop f)))
       ((s ...) (map loop s))
       ((? (cut element? <> heap))  `(,s . heap))
       ((? (cut element? <> stack)) `(,s . stack))
       ((? (cut element? <> vars))  `(,s . frame))
+      ((? number? x) x)
       (s `(,s . gref))))
     (define proc (loop s))
     (values proc procs))
@@ -470,6 +298,10 @@
 
 ; compile tagged to vm
 (define (compile-to-vm s)
+  (define (%compile-to-vm-pred p)
+    (case (caar p)
+       ((>) 'g)
+       ((=) 'z)))
   (define (%compile-to-vm c j)
     (match c
      (('(lambda . syntax) (args ...) body ...) `(
@@ -480,6 +312,36 @@
      (('(set! . gref) sym arg) `(
       ,@(%compile-to-vm arg (+ j 1))
       ((<- . syntax) ,sym (0 . out))))
+     (('(+ . gref) arg1 arg2) `(
+       ,@(%compile-to-vm arg1 (+ j 1))
+       ((<- . syntax) ((,j 0) . stack) (0 . out))
+       ,@(%compile-to-vm arg2 (+ j 1))
+       ((add . builtin) (0 . out) ((,j 0) . stack))))
+     (('(- . gref) arg1 arg2) `(
+       ,@(%compile-to-vm arg2 (+ j 1))
+       ((<- . syntax) ((,j 0) . stack) (0 . out))
+       ,@(%compile-to-vm arg1 (+ j 1))
+       ((sub . builtin) (0 . out) ((,j 0) . stack))))
+     (('(> . gref) arg1 arg2) `(
+       ,@(%compile-to-vm arg2 (+ j 1))
+       ((<- . syntax) ((,j 0) . stack) (0 . out))
+       ,@(%compile-to-vm arg1 (+ j 1))
+       ((cmp . builtin) (0 . out) ((,j 0) . stack))))
+     (('(= . gref) arg1 arg2) `(
+       ,@(%compile-to-vm arg2 (+ j 1))
+       ((<- . syntax) ((,j 0) . stack) (0 . out))
+       ,@(%compile-to-vm arg1 (+ j 1))
+       ((cmp . builtin) (0 . out) ((,j 0) . stack))))
+     (('(if . syntax) pred true-case false-case) `(
+        ,@(%compile-to-vm pred j)
+        (,(case (%compile-to-vm-pred pred)
+            ((z) '(jnz . builtin))
+            ((g) '(jng . builtin))) (,(lambda (table self base) (- (px (cdr (assq 1 table))) (p self))) (0 0 0 0) . rel-label))
+        ,@(%compile-to-vm true-case j)
+        ((jmp . builtin) (,(lambda (table self base) (- (px (cdr (assq 2 table))) (p self))) (0 0 0 0) . rel-label))
+        ((label . builtin) 1)
+        ,@(%compile-to-vm false-case j)
+        ((label . builtin) 2)))
      ((proc args ...) `(
        ,@(apply append (map-with-index (lambda (i arg) `(
            ,@(%compile-to-vm arg (+ j 1))
@@ -642,7 +504,6 @@
         ((index . 'in)  (list-ref '(rbp rbx rsi rdx) index))
         ((index . 'frame-in) (list-ref '(rsi rdx) index))
         ((index . 'sys) (list-ref '(rsp rdi rbp) index))
-        (((? number? x) . 'gref) x)
         ((x . y) (cons (car (loop (list x))) y))
         (x x))) a))))
 
@@ -660,7 +521,11 @@
             ((push) (apply oppush args))
             ((ret)  (apply opret args))
             ((lea)  (apply oplea args))
-            (else i)))) (second c))))
+            ((cmp)  (apply opcmp args))
+            ((jnz) `(#x0F #x85 ,@args))
+            ((jng) `(#x0F #x8E ,@args))
+            ((jmp) `(#xE9 ,@args))
+            (else (list i))))) (second c))))
 
 (define (link-label base codes)
   (define table '())
@@ -669,22 +534,30 @@
     (push! table (cons (first code) x))
     (let loop ((binary (third code)))
       (for-each (lambda (b)
-        (if (label? b)
-          (loop (second b))
-          (set! x (+ x 1)))) binary))) codes)
+        (cond 
+          ((label-symbol? b)     (loop (second b)))
+          ((rel-label-symbol? b) (loop (second b)))
+          ((label? b) (push! table (cons (second b) x)))
+          (else (set! x (+ x 1))))) binary))) codes)
+  (set! x 0)
   (append-map (lambda (code)
     (append-map (lambda (b)
-       (if (label? b)
-          (enc 8 8 (+ base (cdr (assoc (first b) table))))
-          (list b))) (third code))) codes))
+       (cond
+          ((label-symbol? b)     (set! x (+ x (length (second b)))) ;XXX
+                                 (enc 8 (length (second b)) (+ base (cdr (assoc (first b) (p table))))))
+          ((rel-label-symbol? b) (p b) (set! x (+ x (length (second b))))
+                                 (enc 8 (length (second b)) ((first b) table x base)))
+          ((label? b) '())
+          (else (set! x (+ x 1)) (list b)))) (third code))) codes))
 
 (define (binary-compile s base)
   (define c (map compile-to-binary (map render-register (map compile-to-assembly (map compile-to-vm (compile-to-tagged s))))))
-  (disp-inst c)
+  '(disp-inst c)
   (list->string  (map integer->char (link-label base c))))
 
 (define (read-compile base)
   (display "test> ")
   (binary-compile (read) base))
 
+'(read-compile 0)
 (return-to-host)

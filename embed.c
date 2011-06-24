@@ -34,14 +34,14 @@ int main (int argc, char** argv) {
   int len = *((int *) *result);
   char* binary = ((char *) *result) + 8;
   for (i=0;i<len;) {
-   printf ("0x%x: ", c+i); 
+  // printf ("0x%x: ", c+i); 
    for (j=0;j<16;j++) {
     *(c+i) = *(binary+i);
-    printf ("%02hhx ", *(c+i));
+  //  printf ("%02hhx ", *(c+i));
     i++;}
-   printf ("\n"); 
+  // printf ("\n"); 
   }
-  long long int v = ((long long int (*) (char*, int, long long int (*) (long long int, long long int))) c)  (mem, 4096, service);
+  long long int v = ((long long int (*) (char*, int, long long int (*) (long long int, long long int))) c)  (mem+10, 4096, service);
   printf (" => %d (0x%Lx)\n", v, v);
  }
   return 0;
