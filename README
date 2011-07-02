@@ -1,3 +1,5 @@
+jit-scheme is an experemental JIT compiler for (for now subset of) Scheme.
+
 :Dependency:
  Chicken scheme
   $ apt-get install chicken

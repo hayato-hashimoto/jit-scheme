@@ -1,4 +1,6 @@
 (use srfi-1)
+(use srfi-4)
+(use srfi-38)
 (use matchable)
 
 (define (map-with-index proc lis)
@@ -68,7 +70,7 @@
 (define (opcall dest)
   (norex-instruction/subcode '(#xFF) #x02 dest))
 
-(define (p x) x)
+(define (p x) (disp-tree x)(newline) x)
 (define (px x) x)
 (define (opadd dest src)
   (cond
@@ -98,7 +100,8 @@
 (define (opmov dest src)
   (cond
     ((label-symbol? src)   `(,@(rex-prefix 0 0) ,(logior #xB8 (regi dest)) ,src))
-    ((integer? src) `(,@(instruction/subcode '(#xC7) 0 dest) ,@(enc 8 4 src)))
+    ((and (integer? src) (< #x-80000000 src #x79999999)) `(,@(instruction/subcode '(#xC7) 0 dest) ,@(enc 8 4 src)))
+    ((integer? src) `(,@(rex-prefix 0 0) ,(logior #xB8 (regi dest)) ,@(enc 8 8 src)))
     ((pair? dest) (instruction '(#x89) src dest))
     (else (instruction '(#x8B) dest src))))
 
@@ -237,7 +240,7 @@
       (cons `((lambda . syntax) ,(%%compile-to-tagged args heap stack frame vars) ,@codes) procs))))
 
 
-; heap  - variables that should be allocated on heap (i.e. )
+; heap  - variables that should be allocated on heap (i.e. variables to be captured in other lambdas)
 ; stack - variables that could be allocated on stack.
 ; frame - variables refering outer frame.
 (define (%%compile-to-tagged s heap stack frame vars)
@@ -254,8 +257,9 @@
       ((s ...) (map loop s))
       ((? (cut element? <> heap))  `(,s . heap))
       ((? (cut element? <> stack)) `(,s . stack))
-      ((? (cut element? <> vars))  `(,s . frame))
+      ((? (cut element? <> (p vars)))  `(,s . frame))
       ((? number? x) x)
+      ((? lookup) (lookup s))
       (s `(,s . gref))))
     (define proc (loop s))
     (values proc procs))
@@ -274,6 +278,7 @@
     ((and (pair? term) (eq? (cdr term) 'sys))  (display (format "[1;35msys~a[m " (car term))))
     ((and (pair? term) (eq? (cdr term) 'procedure))  (display "[1;36m#proc[m "))
     ((and (pair? term) (eq? (cdr term) 'ref)) (display "[") (for-each disp-tree (car term)) (display "] "))
+    ((and (pair? term) (not (pair? (cdr term))) (not (null? (cdr term)))) (display "(") (disp-tree (car term)) (display ". ") (disp-tree (cdr term)) (display ") "))
     ((pair? term) (display "(") (for-each disp-tree term) (display ") "))
     (else (display term) (display " "))))
 
@@ -312,6 +317,9 @@
      (('(set! . gref) sym arg) `(
       ,@(%compile-to-vm arg (+ j 1))
       ((<- . syntax) ,sym (0 . out))))
+     (('(read . gref) arg1) `(
+       ,@(%compile-to-vm arg1 (+ j 1))
+       ((<- . syntax) (0 . out) (((0 . out)) . ref))))
      (('(+ . gref) arg1 arg2) `(
        ,@(%compile-to-vm arg1 (+ j 1))
        ((<- . syntax) ((,j 0) . stack) (0 . out))
@@ -544,20 +552,94 @@
     (append-map (lambda (b)
        (cond
           ((label-symbol? b)     (set! x (+ x (length (second b)))) ;XXX
-                                 (enc 8 (length (second b)) (+ base (cdr (assoc (first b) (p table))))))
-          ((rel-label-symbol? b) (p b) (set! x (+ x (length (second b))))
+                                 (enc 8 (length (second b)) (p (+ base (p (cdr (assoc (first b) (p table))))))))
+          ((rel-label-symbol? b) (set! x (+ x (length (second b))))
                                  (enc 8 (length (second b)) ((first b) table x base)))
           ((label? b) '())
           (else (set! x (+ x 1)) (list b)))) (third code))) codes))
 
-(define (binary-compile s base)
-  (define c (map compile-to-binary (map render-register (map compile-to-assembly (map compile-to-vm (compile-to-tagged s))))))
-  '(disp-inst c)
-  (list->string  (map integer->char (link-label base c))))
+(define (setup-user-namespace)
+  (eval '(define builtin-namespace (current-namespace)))
+  (eval '(define meta-namespace    (make-namespace)))
+  (eval '(import-namespace-to meta-namespace builtin-namespace))
+  (eval '(select-namespace meta-namespace))
+  (eval '(define meta-namespace (current-namespace)))
+  (eval '(define user (make-namespace)))
+  (eval '(import-namespace-to user builtin-namespace))
+  (eval '(import-namespace-to user meta-namespace))
+  (eval '(select-namespace user))
+  (eval '(define namespace-name "user")))
+ 
+(define (compile-and-eval expr)
+  (define c (map compile-to-binary (map render-register (map compile-to-assembly (map compile-to-vm (p (compile-to-tagged expr)))))))
+  (disp-inst c)
+  (define b (list->u8vector (link-label (binary-address) c)))
+  (define a ((foreign-lambda unsigned-long "exec_binary" integer u8vector) (u8vector-length b) b))
+  (define r 
+  (+ (ash (px (modulo ((foreign-lambda integer "fetch_result_higher32")) #x100000000)) 32)
+          (px (modulo ((foreign-lambda integer "fetch_result_lower32"))  #x100000000))))
+  r)
 
-(define (read-compile base)
+
+; Due to poor support of 64-bit variables in chicken scheme ...
+(define (binary-address)
+  (+ (ash (modulo ((foreign-lambda integer "binary_address_higher32")) #x100000000) 32)
+     (modulo ((foreign-lambda integer "binary_address_lower32"))  #x100000000)))
+
+(define (repl)
+  (define expr   #f)
+  (define result #f)
   (display "test> ")
-  (binary-compile (read) base))
+  (set! expr (read))
+  (set! result (eval expr))
+  (cond
+    ((number? result) (display (format " => ~a (0x~x)\n" result result)))
+    ((pair? result) (display (format " => ~a\n" (with-output-to-string (lambda () (write/ss result))))))
+    (else          (display (format " => ~a\n" result))))
+  (repl))
 
-'(read-compile 0)
-(return-to-host)
+(define default-namespace
+  '(((define               . (define . syntax))
+     (make-namespace       . (make-namespace . meta))
+     (select-namespace     . (select-namespace . meta))
+     (import-namespace-to  . (import-namespace-to . meta))
+     (current-namespace    . (current-namespace . meta))
+     (exit                 . (exit . meta)))))
+
+(define (assq-ref lis sym false-case)
+  (or (and (assq sym lis) (cdr (assq sym lis))) false-case))
+(define (assq-ref-list lis sym)
+  (or (and (assq sym lis) (list (cdr (assq sym lis)))) '()))
+
+(define (lookup sym)
+  (car* (append-map (cut assq-ref-list <> sym) current-namespace)))
+
+(define (car* maybe-lis)
+  (if (null? maybe-lis) #f (car maybe-lis)))
+
+(define (eval expr)
+  (cond 
+    ((pair? expr) (match (eval (car expr))
+      ('(define . syntax) (set-cdr! (last-pair (car current-namespace)) (list (cons (cadr expr) (eval (caddr expr))))))
+      (`(,meta  . meta)   (apply (assq-ref meta-procs meta #f) (map eval (cdr expr))))
+      (else (compile-and-eval `(lambda () ,expr)))))
+    ((symbol? expr) (lookup expr))
+    (else expr)))
+
+(define current-namespace default-namespace)
+
+(define (get-current-namespace) current-namespace)
+(define (select-namespace namespace) (set! current-namespace namespace))
+(define (make-namespace) (list (list (cons 1 1))))
+(define (import-namespace-to dest src)
+  (set-cdr! (last-pair dest) (list (car src))))
+
+(define meta-procs
+  `((make-namespace      . ,make-namespace)
+    (select-namespace    . ,select-namespace)
+    (current-namespace   . ,get-current-namespace)
+    (import-namespace-to . ,import-namespace-to)
+    (exit                . ,exit)))
+
+(setup-user-namespace)
+(repl)
