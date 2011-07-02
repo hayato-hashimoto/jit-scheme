@@ -230,8 +230,9 @@
 
 (define (compile-to-tagged s)
   (match s
-    (((or 'lambda 'fn) args body ...) (%compile-to-tagged body args '() args))
-    (sexp (%compile-to-tagged (list sexp) '() '() '()))))
+    (((or 'lambda 'fn) args body ...) 
+       (%compile-to-tagged body args '() args))))
+  ;  (sexp (%compile-to-tagged (list sexp) '() '() '()))))
 
 (define (%compile-to-tagged body args frame vars)
   (let* ((heap (heap-vars body args)) (stack (stack-vars heap args)))
@@ -244,11 +245,12 @@
 ; stack - variables that could be allocated on stack.
 ; frame - variables refering outer frame.
 (define (%%compile-to-tagged s heap stack frame vars)
+  (p vars)
   (define procs '())
   (define (loop s)
     (match s
       (((or 'lambda 'fn) args body ...)
-        (let1 p (%compile-to-tagged body args frame vars)
+        (let1 p (%compile-to-tagged body args frame (append vars args))
             (set! procs (append p procs))
             `((close . syntax)
               ,(map loop (filter (lambda (x) (any (cut eq? <> x) (free-vars s))) vars))
@@ -257,7 +259,7 @@
       ((s ...) (map loop s))
       ((? (cut element? <> heap))  `(,s . heap))
       ((? (cut element? <> stack)) `(,s . stack))
-      ((? (cut element? <> (p vars)))  `(,s . frame))
+      ((? (cut element? <> vars))  `(,s . frame))
       ((? number? x) x)
       ((? lookup) (lookup s))
       (s `(,s . gref))))
@@ -508,10 +510,10 @@
     (let loop ((a (second c)))
     (tree-walk map (lambda (x)
       (match x
-        ((index . 'out) (list-ref '(rax rcx rbx rbp) index))
+        ((index . 'out) (list-ref '(rax rdx) index))
         ((index . 'in)  (list-ref '(rbp rbx rsi rdx) index))
         ((index . 'frame-in) (list-ref '(rsi rdx) index))
-        ((index . 'sys) (list-ref '(rsp rdi rbp) index))
+        ((index . 'sys) (list-ref '(rsp rdi rcx) index))
         ((x . y) (cons (car (loop (list x))) y))
         (x x))) a))))
 
