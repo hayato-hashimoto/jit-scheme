@@ -10,8 +10,14 @@ char *heap;
 u_int64_t result;
 
 u_int64_t exec_binary (int len, char *code) {
+  char *ptr = heap+10;
   memcpy (binary, code, len);
   printf ("current heap block at %Lx\n", heap);
+  __asm__ volatile (
+    "mov %0, %%rbx"
+   : 
+   : "r" (ptr)
+   : "rbx");
   result = ((u_int64_t (*) (char*, int)) binary) (heap+10, 4096);
   binary += len;
   heap   += 256;

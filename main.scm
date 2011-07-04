@@ -2,6 +2,7 @@
 (use srfi-4)
 (use srfi-38)
 (use matchable)
+(use lolevel)
 
 (define (map-with-index proc lis)
   (map-with-index% proc 0 lis))
@@ -56,8 +57,7 @@
 (define (flush) (flush-output))
 
 (define registers32 '(eax ecx edx ebx esp ebp esi edi))
-(define registers64 '(rax rcx rdx rbx rsp rbp rsi rdi))
-(define registers64-extra '(r8 r9 r10 r11 r12 r13 r14 r15))
+(define registers64 '(rax rcx rdx rbx rsp rbp rsi rdi r8 r9 r10 r11 r12 r13 r14 r15))
 
 (define (relocation-proc p)
   (lambda (x y)
@@ -70,7 +70,7 @@
 (define (opcall dest)
   (norex-instruction/subcode '(#xFF) #x02 dest))
 
-(define (p x) (disp-tree x)(newline) x)
+(define (p x) (disp-tree x) (newline) x)
 (define (px x) x)
 (define (opadd dest src)
   (cond
@@ -99,23 +99,26 @@
 
 (define (opmov dest src)
   (cond
-    ((label-symbol? src)   `(,@(rex-prefix 0 0) ,(logior #xB8 (regi dest)) ,src))
+    ((label-symbol? src)   `(,@(rex-prefix dest 'rax) ,(logior #xB8 (regi dest)) ,src))
     ((and (integer? src) (< #x-80000000 src #x79999999)) `(,@(instruction/subcode '(#xC7) 0 dest) ,@(enc 8 4 src)))
-    ((integer? src) `(,@(rex-prefix 0 0) ,(logior #xB8 (regi dest)) ,@(enc 8 8 src)))
+    ((integer? src) `(,@(rex-prefix dest 'rax) ,(logior #xB8 (regi dest)) ,@(enc 8 8 src)))
     ((pair? dest) (instruction '(#x89) src dest))
     (else (instruction '(#x8B) dest src))))
 
 (define (oppush reg)
-  `(,(logior #x50 (regi reg))))
+  `(,@(rex-prefix/b reg) ,(logior #x50 (regi reg))))
 
 (define (oppop reg)
-  `(,(logior #x58 (regi reg))))
+  `(,@(rex-prefix/b reg) ,(logior #x58 (regi reg))))
+
+(define (rex-prefix/b r)
+  (if (= (regrex r) 0) '() '(#x41)))
 
 (define (oplea dest src)
   (instruction '(#x8D) dest src)) 
 
 (define (instruction opcode reg r/m)
-  (p (format "instruction ~a" opcode))
+  (p (format "instruction ~a: ~a ~a" opcode reg r/m))
   `(,@(rex-prefix reg r/m)
     ,@opcode
     ,@(modR/M (regi reg) r/m)
@@ -124,7 +127,7 @@
 
 (define (instruction/subcode opcode opcode-sub r/m)
   (p (format "instruction ~a ~a: ~a" opcode opcode-sub r/m))
-  `(,@(rex-prefix #f r/m)
+  `(,@(rex-prefix 'rax r/m)
     ,@opcode
     ,@(modR/M opcode-sub r/m)
     ,@(sib r/m)
@@ -138,7 +141,16 @@
     ,@(displacement r/m)))
 
 (define (rex-prefix reg place)
-  (list #x48))
+  (p place)
+  (list (logior #x48 (ash (regrex reg) 2) (ash (regrex (sib-index place)) 1) (regrex (sib-base place)))))
+
+(define (sib-base place)
+  (cond
+    ((and (pair? place) (or (eq? (first (car place)) '+) (eq? (first (car place)) '-))) (second (car place)))
+    ((and (pair? place) (first (car place))))
+    (else place)))
+
+(define (sib-index a) 'rax)
 
 (define (modR/M reg place)
   (define (r/m-byte mode reg rm)
@@ -204,8 +216,13 @@
     (list (relocation-symbol (lambda (i) (enc bits len ((cadr value) i))) (lambda (i) (enc bits len ((caddr value) i)))))))
 
 (define (regi regsym)
+  (let1 ret
     (or (list-index (cut eq? regsym <>) registers32)
-        (list-index (cut eq? regsym <>) registers64)))
+        (list-index (cut eq? regsym <>) registers64))
+    (if (number? ret) (logand ret 7) ret)))
+
+(define (regrex regsym)
+  (ash (list-index (cut eq? regsym <>) registers64) -3))
 
 ; return
 (define (opret)
@@ -305,10 +322,11 @@
 
 ; compile tagged to vm
 (define (compile-to-vm s)
-  (define (%compile-to-vm-pred p)
-    (case (caar p)
-       ((>) 'g)
-       ((=) 'z)))
+  (define (%compile-to-vm-pred a)
+    (p a)
+    (cond
+      ((eq? builtin-gt (car a)) 'g)
+      ((eq? builtin-eq (car a)) 'z)))
   (define (%compile-to-vm c j)
     (match c
      (('(lambda . syntax) (args ...) body ...) `(
@@ -319,25 +337,37 @@
      (('(set! . gref) sym arg) `(
       ,@(%compile-to-vm arg (+ j 1))
       ((<- . syntax) ,sym (0 . out))))
-     (('(read . gref) arg1) `(
+     (('(builtin read) arg1) `(
        ,@(%compile-to-vm arg1 (+ j 1))
        ((<- . syntax) (0 . out) (((0 . out)) . ref))))
-     (('(+ . gref) arg1 arg2) `(
+     (('(builtin cons) arg1 arg2) `(
+       ,@(%compile-to-vm arg1 (+ j 1))
+       ((<- . syntax) ((,j 0) . stack) (0 . out))
+       ,@(%compile-to-vm arg2 (+ j 1))
+       ((cons . builtin) ((,j 0) . stack) (0 . out))))
+     (('(builtin tri) arg1 arg2 arg3) `(
+       ,@(%compile-to-vm arg1 (+ j 1))
+       ((<- . syntax) ((,j 0) . stack) (0 . out))
+       ,@(%compile-to-vm arg2 (+ j 1))
+       ((<- . syntax) ((,j 1) . stack) (0 . out))
+       ,@(%compile-to-vm arg3 (+ j 1))
+       ((tri . builtin) ((,j 0) . stack) ((,j 1) . stack) (0 . out))))
+     (('(builtin +) arg1 arg2) `(
        ,@(%compile-to-vm arg1 (+ j 1))
        ((<- . syntax) ((,j 0) . stack) (0 . out))
        ,@(%compile-to-vm arg2 (+ j 1))
        ((add . builtin) (0 . out) ((,j 0) . stack))))
-     (('(- . gref) arg1 arg2) `(
+     (('(builtin -) arg1 arg2) `(
        ,@(%compile-to-vm arg2 (+ j 1))
        ((<- . syntax) ((,j 0) . stack) (0 . out))
        ,@(%compile-to-vm arg1 (+ j 1))
        ((sub . builtin) (0 . out) ((,j 0) . stack))))
-     (('(> . gref) arg1 arg2) `(
+     (('(builtin >) arg1 arg2) `(
        ,@(%compile-to-vm arg2 (+ j 1))
        ((<- . syntax) ((,j 0) . stack) (0 . out))
        ,@(%compile-to-vm arg1 (+ j 1))
        ((cmp . builtin) (0 . out) ((,j 0) . stack))))
-     (('(= . gref) arg1 arg2) `(
+     (('(builtin =) arg1 arg2) `(
        ,@(%compile-to-vm arg2 (+ j 1))
        ((<- . syntax) ((,j 0) . stack) (0 . out))
        ,@(%compile-to-vm arg1 (+ j 1))
@@ -346,7 +376,8 @@
         ,@(%compile-to-vm pred j)
         (,(case (%compile-to-vm-pred pred)
             ((z) '(jnz . builtin))
-            ((g) '(jng . builtin))) (,(lambda (table self base) (- (px (cdr (assq 1 table))) (p self))) (0 0 0 0) . rel-label))
+            ((g) '(jng . builtin)))
+        (,(lambda (table self base) (- (px (cdr (assq 1 table))) (p self))) (0 0 0 0) . rel-label))
         ,@(%compile-to-vm true-case j)
         ((jmp . builtin) (,(lambda (table self base) (- (px (cdr (assq 2 table))) (p self))) (0 0 0 0) . rel-label))
         ((label . builtin) 1)
@@ -479,11 +510,32 @@
              ((mov . builtin) ((- (1 . sys) ,(* size-of-ptr (+ i 1))) . ref) (0 . out))))
            vars))
          ((mov  . builtin) (0 . out) (1 . sys))))
+      (('(cons . builtin) arg1 arg2) `(
+; allocate
+         ((add . builtin) (1 . sys) ,(* size-of-ptr 2))
+         ((mov . builtin) (((1 . sys)) . ref) ,arg2)
+         ((mov . builtin) (0 . out) ,arg1)
+         ((mov . builtin) ((- (1 . sys) ,size-of-ptr) . ref) (0 . out))
+; return
+         ((mov . builtin) (0 . out) (1 . sys))))
+      (('(tri . builtin) arg1 arg2 arg3) `(
+; allocate
+         ((add . builtin) (1 . sys) ,(* size-of-ptr 3))
+         ((mov . builtin) (0 . out) ,arg3)
+         ((mov . builtin) (((1 . sys)) . ref) (0 . out))
+         ((mov . builtin) (0 . out) ,arg2)
+         ((mov . builtin) ((- (1 . sys) ,size-of-ptr) . ref) (0 . out))
+         ((mov . builtin) (0 . out) ,arg1)
+         ((mov . builtin) ((- (1 . sys) ,(* 2 size-of-ptr)) . ref) (0 . out))
+; return
+         ((mov . builtin) (0 . out) (1 . sys))))
       (('(<- . syntax) dest src) `(((mov . builtin) ,dest ,src)))
       (('(call . syntax) proc) `(
-         ((mov . builtin) (0 . frame-in) ((- ,proc ,(* size-of-ptr 1)) . ref))
-         ((mov . builtin) (1 . frame-in) ((- ,proc ,(* size-of-ptr 2)) . ref))
-         ((call . builtin) ((,proc) . ref))))
+         ((push . builtin) (0 . frame-in))
+         ((mov . builtin)  (0 . frame-in) ((- ,proc ,(* size-of-ptr 1)) . ref))
+         ;((mov . builtin) (1 . frame-in) ((- ,proc ,(* size-of-ptr 2)) . ref))
+         ((call . builtin) ((,proc) . ref))
+         ((pop . builtin)  (0 . frame-in))))
       (x (list x))))
   (let ((s (find-vars c 'stack)) (h (find-vars c 'heap)) (f (find-vars c 'frame)))
     (define (rep x)
@@ -510,10 +562,10 @@
     (let loop ((a (second c)))
     (tree-walk map (lambda (x)
       (match x
-        ((index . 'out) (list-ref '(rax rdx) index))
-        ((index . 'in)  (list-ref '(rbp rbx rsi rdx) index))
-        ((index . 'frame-in) (list-ref '(rsi rdx) index))
-        ((index . 'sys) (list-ref '(rsp rdi rcx) index))
+        ((index . 'out) (list-ref '(rax rsi rdx rcx r8 r9) index))
+        ((index . 'in)  (list-ref '(rdi rsi rdx rcx r8 r9) index))
+        ((index . 'frame-in) (list-ref '(r15 r14 r13) index))
+        ((index . 'sys) (list-ref '(rsp rbx rbp) index))
         ((x . y) (cons (car (loop (list x))) y))
         (x x))) a))))
 
@@ -560,20 +612,8 @@
           ((label? b) '())
           (else (set! x (+ x 1)) (list b)))) (third code))) codes))
 
-(define (setup-user-namespace)
-  (eval '(define builtin-namespace (current-namespace)))
-  (eval '(define meta-namespace    (make-namespace)))
-  (eval '(import-namespace-to meta-namespace builtin-namespace))
-  (eval '(select-namespace meta-namespace))
-  (eval '(define meta-namespace (current-namespace)))
-  (eval '(define user (make-namespace)))
-  (eval '(import-namespace-to user builtin-namespace))
-  (eval '(import-namespace-to user meta-namespace))
-  (eval '(select-namespace user))
-  (eval '(define namespace-name "user")))
- 
 (define (compile-and-eval expr)
-  (define c (map compile-to-binary (map render-register (map compile-to-assembly (map compile-to-vm (p (compile-to-tagged expr)))))))
+  (define c (map compile-to-binary (map render-register (p (map compile-to-assembly (map compile-to-vm (p (compile-to-tagged expr))))))))
   (disp-inst c)
   (define b (list->u8vector (link-label (binary-address) c)))
   (define a ((foreign-lambda unsigned-long "exec_binary" integer u8vector) (u8vector-length b) b))
@@ -593,20 +633,62 @@
   (define result #f)
   (display "test> ")
   (set! expr (read))
-  (set! result (eval expr))
+  (set! result (eval* expr))
   (cond
     ((number? result) (display (format " => ~a (0x~x)\n" result result)))
+    ((any (cut eq? <> result) namespaces) (display (format " => #<namespace>\n")))
     ((pair? result) (display (format " => ~a\n" (with-output-to-string (lambda () (write/ss result))))))
     (else          (display (format " => ~a\n" result))))
   (repl))
 
-(define default-namespace
-  '(((define               . (define . syntax))
-     (make-namespace       . (make-namespace . meta))
-     (select-namespace     . (select-namespace . meta))
-     (import-namespace-to  . (import-namespace-to . meta))
-     (current-namespace    . (current-namespace . meta))
-     (exit                 . (exit . meta)))))
+(define sys-define              '(system define))
+(define sys-make-namespace      '(system make-namespace))
+(define sys-select-namespace    '(system select-namespace))
+(define sys-import-namespace-to '(system import-namespace-to))
+(define sys-current-namespace   '(system current-namespace))
+(define sys-exit                '(system exit))
+(define sys-dlopen              '(system dlopen))
+(define sys-dlsym               '(system dlsym))
+(define sys-eval                '(system eval))
+(define builtin-add         '(builtin +))
+(define builtin-sub         '(builtin -))
+(define builtin-mul         '(builtin *))
+(define builtin-div         '(builtin /))
+(define builtin-eq          '(builtin =))
+(define builtin-gt          '(builtin >))
+(define builtin-read        '(builtin read))
+(define builtin-write       '(builtin write))
+(define builtin-cons        '(builtin cons))
+(define builtin-tri         '(builtin tri))
+
+(define namespace-function-namespace
+  `((define               . ,sys-define)
+    (make-namespace       . ,sys-make-namespace)
+    (select-namespace     . ,sys-select-namespace)
+    (import-namespace-to  . ,sys-import-namespace-to)
+    (current-namespace    . ,sys-current-namespace)))
+
+(define internal-namespace
+   `((internal-eval . ,sys-eval)
+     (dlopen        . ,sys-dlopen)
+     (dlsym         . ,sys-dlsym)
+     (exit          . ,sys-exit )))
+
+(define alithmatic-namespace
+  `((+ . ,builtin-add) 
+    (- . ,builtin-sub) 
+    (* . ,builtin-mul) 
+    (/ . ,builtin-div)
+    (= . ,builtin-eq) 
+    (> . ,builtin-gt)))
+
+(define machine-namespace
+  `((read  . ,builtin-read)
+    (write . ,builtin-write)))
+
+(define builtin-namespace
+  `((cons . ,builtin-cons)
+    (tri  . ,builtin-tri)))
 
 (define (assq-ref lis sym false-case)
   (or (and (assq sym lis) (cdr (assq sym lis))) false-case))
@@ -614,34 +696,78 @@
   (or (and (assq sym lis) (list (cdr (assq sym lis)))) '()))
 
 (define (lookup sym)
+  (define (car* maybe-lis) (if (null? maybe-lis) #f (car maybe-lis)))
   (car* (append-map (cut assq-ref-list <> sym) current-namespace)))
 
-(define (car* maybe-lis)
-  (if (null? maybe-lis) #f (car maybe-lis)))
+(define (macro? a) #f)
 
-(define (eval expr)
+(define (eval* expr)
   (cond 
-    ((pair? expr) (match (eval (car expr))
-      ('(define . syntax) (set-cdr! (last-pair (car current-namespace)) (list (cons (cadr expr) (eval (caddr expr))))))
-      (`(,meta  . meta)   (apply (assq-ref meta-procs meta #f) (map eval (cdr expr))))
-      (else (compile-and-eval `(lambda () ,expr)))))
+    ((pair? expr) 
+      (let1 f (eval* (car expr))
+        (cond
+          ((assq f system-syntax)    => (lambda (x) (apply (cdr x) (cdr expr))))
+          ((assq f system-procedure) => (lambda (x) (apply (cdr x) (map eval* (cdr expr)))))
+          ((macro? f) (apply f (cdr expr)))
+          (else (compile-and-eval `(lambda () ,expr))))))
     ((symbol? expr) (lookup expr))
     (else expr)))
 
-(define current-namespace default-namespace)
-
+(define (add-to-namespace name value)
+  (push! (car current-namespace) (cons name value)))
+(define (syntax-define name tree)
+  (add-to-namespace name (eval* tree)))
 (define (get-current-namespace) current-namespace)
 (define (select-namespace namespace) (set! current-namespace namespace))
-(define (make-namespace) (list (list (cons 1 1))))
+(define namespaces '())
+(define (make-namespace)
+  (let1 ns (list (list)) 
+    (push! namespaces ns)
+  ns))
 (define (import-namespace-to dest src)
   (set-cdr! (last-pair dest) (list (car src))))
+(define current-namespace (make-namespace))
+(define (export-to-namespace alist name)
+  (let1 ns (list alist)
+    (push! namespaces ns)
+    (add-to-namespace name ns)
+    ns))
 
-(define meta-procs
-  `((make-namespace      . ,make-namespace)
-    (select-namespace    . ,select-namespace)
-    (current-namespace   . ,get-current-namespace)
-    (import-namespace-to . ,import-namespace-to)
-    (exit                . ,exit)))
+(import-namespace-to current-namespace (export-to-namespace namespace-function-namespace 'namespace-function))
+(export-to-namespace alithmatic-namespace 'alithmatic)
+(export-to-namespace machine-namespace    'machine)
+(export-to-namespace builtin-namespace    'builtin)
+(export-to-namespace internal-namespace   'internal)
 
-(setup-user-namespace)
+(define (dummy) (foreign-code " return 0;}
+#include <dlfcn.h>
+static C_word foo () {
+"))
+(define dlerror (foreign-lambda c-string "dlerror"))
+(define (dlopen file) ((foreign-lambda c-pointer "dlopen" c-string integer) file (foreign-code "return C_fix(RTLD_LAZY);")))
+(define (dlsym handle str)
+  (define-external x c-pointer)
+  (set! x ((foreign-lambda c-pointer "dlsym" c-pointer c-string) handle str))
+  (pointer->address (location x)))
+
+(define system-procedure
+  `((,sys-make-namespace      . ,make-namespace)
+    (,sys-select-namespace    . ,select-namespace)
+    (,sys-current-namespace   . ,get-current-namespace)
+    (,sys-import-namespace-to . ,import-namespace-to)
+    (,sys-exit                . ,exit)
+    (,sys-dlopen              . ,dlopen)
+    (,sys-dlsym               . ,dlsym)))
+
+(define system-syntax
+  `((,sys-define              . ,syntax-define)
+    (,sys-eval                . ,eval)))
+
+(with-input-from-file "default.scm"
+  (lambda ()
+    (let loop ((s (read)))
+      (cond 
+        ((eof-object? s) #t)
+        (else (eval* s) (loop (read)))))))
+
 (repl)
