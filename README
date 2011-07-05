@@ -1,10 +1,12 @@
 jit-scheme is an experemental JIT compiler for (for now subset of) Scheme.
+The goal of jit-scheme is to provide the true dynamic programming environment with fast-compiling fast-running type-aware JIT.
 
 :Dependency:
- Chicken scheme
+ Chicken scheme: Make sure that you get the most recent version.
   $ apt-get install chicken
- Chicken eggs: matchable
+ Chicken eggs: matchable, srfi-38
   $ chicken-install matchable
+  $ chicken-install srfi-38
 
 :Compile:
   $ make
@@ -14,7 +16,7 @@ jit-scheme is an experemental JIT compiler for (for now subset of) Scheme.
 
 :Example:
 :infinite loop: (Omega Combinator)
-  test> ((lambda (a) (a a)) (lambda (a) (a a)))
+test> ((lambda (a) (a a)) (lambda (a) (a a)))
 
 :fibonacci numbers:
  test> (fn (fib)

@@ -10,7 +10,7 @@ char *heap;
 u_int64_t result;
 
 u_int64_t exec_binary (int len, char *code) {
-  char *ptr = heap+10;
+  char *ptr = heap;
   memcpy (binary, code, len);
   printf ("current heap block at %Lx\n", heap);
   __asm__ volatile (
@@ -19,8 +19,14 @@ u_int64_t exec_binary (int len, char *code) {
    : "r" (ptr)
    : "rbx");
   result = ((u_int64_t (*) (char*, int)) binary) (heap+10, 4096);
+  __asm__ volatile (
+   "mov %%rbx, %0"
+   : "=r" (ptr)
+   :
+   : "rbx");
+  printf ("heap used: 0x%x\n", ptr - heap);
+  heap = ptr;
   binary += len;
-  heap   += 256;
   return 0;
 }
 
@@ -50,6 +56,7 @@ void prepare (char* filename) {
                          : mmap (0, 4096, PROT_READ | PROT_WRITE | PROT_EXEC, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
   printf ("code will be loaded at %Lx\n", binary);
   heap      = mmap (0, 4096, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+  heap +=10;
   printf ("heap set at %Lx\n", heap);}
 
 int main (int argc, char** argv) {
