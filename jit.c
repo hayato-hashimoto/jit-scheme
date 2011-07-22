@@ -9,6 +9,9 @@ char *binary;
 char *heap;
 u_int64_t result;
 
+void assign (void *dest, void *src) {
+  *(void * *)dest = src;}
+
 u_int64_t exec_binary (int len, char *code) {
   char *ptr = heap;
   memcpy (binary, code, len);
