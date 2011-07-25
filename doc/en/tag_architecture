@@ -1,0 +1,31 @@
+::Tag architecture::
+
+This sections describes the binary architecture of data internally used in jitscheme.
+
+Every object loaded on 64-bit register on JITSCHEME-EXEC has type [type:Register], in which bits are interpreted as follows:
+
+Higher N bits are tag, which determine the type of data. Mappings between the tag bits and the [semantic type] are configurable at the [metalevel]. Lower (- 64 N) bits are actual data, which represent either an immediate value (i.e. an integer or a flonum) or a pointer.
+
+As an example, given metalevel [state]:
+
+ (exec:tag:N  => 2)
+ (exec:tag:00 => type:())
+ (exec:tag:01 => type:Integer)
+ (exec:tag:10 => type:Cons) ; equivalent to ([type:Pointer] ([type:FixArray] type:Register 2))
+ ; (exec:tag:11 is unused)
+
+Scheme expression (1 (2 . 3) 4) will be rendered into type:Register as:
+
+ (register:dump => 1000000000000000000000000000000000000000000000000000000000000)
+ (address:0000  => 0100000000000000000000000000000000000000000000000000000000001) ; integer 1
+ (address:0001  => 1000000000000000000000000000000000000000000000000000000000010) ; cons refering address:0002
+ (address:0002  => 1000000000000000000000000000000000000000000000000000000000100) ; cons refering address:0004
+ (address:0003  => 1000000000000000000000000000000000000000000000000000000000110) ; cons refering address:0006
+ (address:0004  => 0100000000000000000000000000000000000000000000000000000000010) ; integer 2
+ (address:0005  => 0100000000000000000000000000000000000000000000000000000000011) ; integer 3
+ (address:0006  => 0100000000000000000000000000000000000000000000000000000000100) ; integer 4
+ (address:0007  => 0000000000000000000000000000000000000000000000000000000000000) ; null
+
+The representation in type:Register is depended on [address namespace>meta:address], thus [trans-metaspace function] must export address namespace appropriately.
+
+{{Category "data structure" "calculation model"}}

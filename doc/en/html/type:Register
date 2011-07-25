@@ -1,0 +1,4 @@
+<html><head><style><!-- a:link{color: #ee8800;} a:visited{color: #ee4400;} pre{font-size:80%; padding:0.5em; background-color: #eee; border: 1px dashed;}--></style></head><body><p><h1>type:Register</h1>type:Register is a type internally used in executing programs in JITSCHEME-EXEC. For further information, check out <a href="tag_architecture">tag architecture</a>.
+</p><p><h2>[method]</h2><ul><li> valueOf :: type:Register -> ([type:FixBitsInteger] 64)</li></ul><h2>[deriving/subtyping]</h2>nothing.
+</p><p>{{Category <a href="type">type</a>}}
+</p></body></html>

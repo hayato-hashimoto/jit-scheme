@@ -1,0 +1,10 @@
+::type:Register::
+type:Register is a type internally used in executing programs in JITSCHEME-EXEC. For further information, check out [tag architecture].
+
+:[method]:
+* valueOf :: type:Register -> ([type:FixBitsInteger] 64)
+
+:[deriving/subtyping]:
+nothing.
+
+{{Category [type]}}

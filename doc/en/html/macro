@@ -1,0 +1,16 @@
+<html><head><style><!-- a:link{color: #ee8800;} a:visited{color: #ee4400;} pre{font-size:80%; padding:0.5em; background-color: #eee; border: 1px dashed;}--></style></head><body><p>Definitions:
+Expression      := Application | Self-Evaluating | Symbol
+</p><p>Application a
+<pre>where apply :: Expression e, Expression f => (e, f) -> a e f</pre>Self-Evaluating := Atom | Procedure | Macro
+</p><p>Evaluation rules:
+</p><p>eval :: Self-Evaluating -> Self-Evaluating
+eval a = a
+</p><p>eval :: Symbol -> Self-Evaluating
+eval a = lookup a
+</p><p>eval :: Application Macro Expression -> Application
+eval a m e = (m e)
+</p><p>eval :: Application Procedure Expression -> Self-Evaluating
+eval a p a = (p (eval a))
+</p><p>eval :: Application Expression Expression -> Expression
+eval a f r = (eval (apply (eval f) r)
+</p></body></html>

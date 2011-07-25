@@ -4,6 +4,19 @@
 (use matchable)
 (use lolevel)
 
+(define type '(! type))
+(define type-namespace `(
+  (int_62    . (,type int_62))
+  (cons      . (,type cons))
+  (procedure . (,type procedure))
+  (object    . (,type object))))
+
+(define tag-namespace `(
+  (0 . ,(cdr (assq 'int_62    type-namespace)))
+  (1 . ,(cdr (assq 'cons      type-namespace)))
+  (2 . ,(cdr (assq 'procedure type-namespace)))
+  (3 . ,(cdr (assq 'object    type-namespace)))))
+
 (define (map-with-index proc lis)
   (map-with-index% proc 0 lis))
 
@@ -70,9 +83,16 @@
 (define (opcall dest)
   (norex-instruction/subcode '(#xFF) #x02 dest))
 
-(define (p x) (print x) x)
-(define (p-i x) (disp-inst x) x)
+(define (p x)  x)
+(define (p-i x) x)
 (define (px x) x)
+
+(define (opand dest src)
+  (instruction '(#x23) dest src))
+
+(define (opor dest src)
+  (instruction '(#x0B) dest src))
+
 (define (opadd dest src)
   (cond
     ((integer? src) `(,@(instruction/subcode '(#x81) #x00 dest) ,@(enc 8 4 src)))
@@ -105,9 +125,9 @@
 
 (define (opmov dest src)
   (cond
-    ((label-symbol? src)   `(,@(rex-prefix dest 'rax) ,(logior #xB8 (regi dest)) ,src))
+    ((label-symbol? src)   `(,@(rex-prefix 'rax dest) ,(logior #xB8 (regi dest)) ,src))
     ((and (integer? src) (< #x-80000000 src #x79999999)) `(,@(instruction/subcode '(#xC7) 0 dest) ,@(enc 8 4 src)))
-    ((integer? src) `(,@(rex-prefix dest 'rax) ,(logior #xB8 (regi dest)) ,@(enc 8 8 src)))
+    ((integer? src) `(,@(rex-prefix 'rax dest) ,(logior #xB8 (regi dest)) ,@(enc 8 8 src)))
     ((pair? dest) (instruction '(#x89) src dest))
     (else (instruction '(#x8B) dest src))))
 
@@ -333,8 +353,9 @@
   (define (%compile-to-vm-pred a)
     (p a)
     (cond
-      ((eq? builtin-gt (car a)) 'g)
-      ((eq? builtin-eq (car a)) 'z)))
+      ((and (pair? a) (eq? builtin-gt (car a))) 'g)
+      ((and (pair? a) (eq? builtin-eq (car a))) 'z)
+      (else 'cmpz)))
   (define (%compile-to-vm c j)
     (match c
      (('(lambda . syntax) (args ...) body ...) `(
@@ -347,13 +368,29 @@
       ((<- . syntax) ,sym (0 . out))))
      (('(builtin read) arg1) `(
        ,@(%compile-to-vm arg1 (+ j 1))
+       ((<- . syntax) (0 . tmp) #xfffffffffffff)
+       ((and . builtin) (0 . out) (0 . tmp))
        ((<- . syntax) (0 . out) (((0 . out)) . ref))))
      (('(builtin write) arg1 arg2) `(
        ,@(%compile-to-vm arg2 (+ j 1))
        ((<- . syntax) ((,j 0) . stack) (0 . out))
        ,@(%compile-to-vm arg1 (+ j 1))
        ((<- . syntax) (1 . out) ((,j 0) . stack))
+       ((<- . syntax) (0 . tmp) #xfffffffffffff)
+       ((and . builtin) (0 . out) (0 . tmp))
        ((<- . syntax) (((0 . out)) . ref) (1 . out))))
+     (('(builtin cons) arg1 arg2) `(
+       ,@(%compile-to-vm arg1 (+ j 1))
+       ((<- . syntax) ((,j 0) . stack) (0 . out))
+       ,@(%compile-to-vm arg2 (+ j 1))
+       ((cons . builtin) ((,j 0) . stack) (0 . out))))
+     (('(builtin tri) arg1 arg2 arg3) `(
+       ,@(%compile-to-vm arg1 (+ j 1))
+       ((<- . syntax) ((,j 0) . stack) (0 . out))
+       ,@(%compile-to-vm arg2 (+ j 1))
+       ((<- . syntax) ((,j 1) . stack) (0 . out))
+       ,@(%compile-to-vm arg3 (+ j 1))
+       ((tri . builtin) ((,j 0) . stack) ((,j 1) . stack) (0 . out))))
      (('(builtin cons) arg1 arg2) `(
        ,@(%compile-to-vm arg1 (+ j 1))
        ((<- . syntax) ((,j 0) . stack) (0 . out))
@@ -381,6 +418,16 @@
        ((<- . syntax) ((,j 0) . stack) (0 . out))
        ,@(%compile-to-vm arg1 (+ j 1))
        ((sub . builtin) (0 . out) ((,j 0) . stack))))
+     (('(builtin and) arg1 arg2) `(
+       ,@(%compile-to-vm arg2 (+ j 1))
+       ((<- . syntax) ((,j 0) . stack) (0 . out))
+       ,@(%compile-to-vm arg1 (+ j 1))
+       ((and . builtin) (0 . out) ((,j 0) . stack))))
+     (('(builtin ior) arg1 arg2) `(
+       ,@(%compile-to-vm arg2 (+ j 1))
+       ((<- . syntax) ((,j 0) . stack) (0 . out))
+       ,@(%compile-to-vm arg1 (+ j 1))
+       ((ior . builtin) (0 . out) ((,j 0) . stack))))
      (('(builtin >) arg1 arg2) `(
        ,@(%compile-to-vm arg2 (+ j 1))
        ((<- . syntax) ((,j 0) . stack) (0 . out))
@@ -393,10 +440,11 @@
        ((cmp . builtin) (0 . out) ((,j 0) . stack))))
      (('(if . syntax) pred true-case false-case) `(
         ,@(%compile-to-vm pred j)
-        (,(case (%compile-to-vm-pred pred)
-            ((z) '(jnz . builtin))
-            ((g) '(jng . builtin)))
-        (,(lambda (table self base) (- (px (cdr (assq 1 table))) (p self))) (0 0 0 0) . rel-label))
+        ,@(let1 label1 `(,(lambda (table self base) (- (px (cdr (assq 1 table))) (p self))) (0 0 0 0) . rel-label)
+          (case (%compile-to-vm-pred pred)
+            ((cmpz) `(((cmp . builtin) (0 . out) 0) ((jnz . builtin) ,label1)))
+            ((z)    `(((jnz . builtin) ,label1)))
+            ((g)    `(((jng . builtin) ,label1)))))
         ,@(%compile-to-vm true-case j)
         ((jmp . builtin) (,(lambda (table self base) (- (px (cdr (assq 2 table))) (p self))) (0 0 0 0) . rel-label))
         ((label . builtin) 1)
@@ -585,6 +633,7 @@
         ((index . 'in)  (list-ref '(rdi rsi rdx rcx r8 r9) index))
         ((index . 'frame-in) (list-ref '(r15 r14 r13) index))
         ((index . 'sys) (list-ref '(rsp rbx rbp) index))
+        ((index . 'tmp) (list-ref '(r10 r11 r12) index))
         ((x . y) (cons (car (loop (list x))) y))
         (x x))) a))))
 
@@ -598,6 +647,8 @@
             ((add)  (apply opadd args))
             ((sub)  (apply opsub args))
             ((imul) (apply opimul args))
+            ((and)  (apply opand args))
+            ((ior)  (apply opor args))
             ((call) (apply opcall args))
             ((pop)  (apply oppop args))
             ((push) (apply oppush args))
@@ -633,7 +684,7 @@
           (else (set! x (+ x 1)) (list b)))) (third code))) codes))
 
 (define (compile-and-eval expr)
-  (define c (map compile-to-binary (map render-register (map compile-to-assembly (p-i (map compile-to-vm (compile-to-tagged expr)))))))
+  (define c (map compile-to-binary (p-i (map render-register (map compile-to-assembly (p-i (map compile-to-vm (compile-to-tagged expr))))))))
   (define b (list->u8vector (link-label (binary-address) c)))
   (define a ((foreign-lambda unsigned-long "exec_binary" integer u8vector) (u8vector-length b) b))
   (define r 
@@ -650,9 +701,10 @@
 (define (repl)
   (define expr   #f)
   (define result #f)
-  (display "test> ")
+  (display "[1;35mscheme>[m ")
   (set! expr (read))
   (set! result (eval* expr))
+  (if (integer? result) (set! result (decode-value result)))
   (cond
     ((number? result) (display (format " => ~a (0x~x)\n" result result)))
     ((any (cut eq? <> result) namespaces) (display (format " => #<namespace>\n")))
@@ -693,6 +745,13 @@ static C_word foo () {
   ((foreign-lambda void "assign" c-pointer c-pointer) return x)
   (pointer->address return))
 
+(define-external (system_print (integer n)) void (print n))
+ 
+(define (export-proc proc)
+  (define return (allocate 8))
+  ((foreign-lambda void "assign" c-pointer c-pointer) return proc)
+  (pointer->address return))
+
 (define (make-macro x) `(,macro ,(lambda args (eval* (cons x (encode args))))))
 (define (define-to-sys-define name value)
     (if (pair? name)
@@ -710,6 +769,7 @@ static C_word foo () {
 (define sys-dlopen              `(,system ,dlopen))
 (define sys-dlsym               `(,system ,dlsym))
 (define sys-macro               `(,system ,make-macro))
+(define sys-display             `(,system ,display))
 (define sys-eval                `(,system eval))
 
 (define builtin-add         '(builtin +))
@@ -718,6 +778,8 @@ static C_word foo () {
 (define builtin-div         '(builtin /))
 (define builtin-eq          '(builtin =))
 (define builtin-gt          '(builtin >))
+(define builtin-and         '(builtin and))
+(define builtin-ior         '(builtin ior))
 (define builtin-read        '(builtin read))
 (define builtin-write       '(builtin write))
 (define builtin-cons        '(builtin cons))
@@ -738,13 +800,17 @@ static C_word foo () {
    `((internal-eval . ,sys-eval)
      (dlopen        . ,sys-dlopen)
      (dlsym         . ,sys-dlsym)
+     (display       . ,sys-display)
+     (print         . ,(export-proc system_print))
      (exit          . ,sys-exit )))
 
-(define alithmatic-namespace
+(define arithmetic-namespace
   `((+ . ,builtin-add) 
     (- . ,builtin-sub) 
     (* . ,builtin-imul) 
     (/ . ,builtin-div)
+    (and . ,builtin-and) 
+    (ior . ,builtin-ior) 
     (= . ,builtin-eq) 
     (> . ,builtin-gt)))
 
@@ -753,7 +819,7 @@ static C_word foo () {
     (write . ,builtin-write)))
 
 (define builtin-namespace
-  `((cons . ,builtin-cons)
+  `((pair . ,builtin-cons)
     (tri  . ,builtin-tri)))
 
 (define macro-namespace 
@@ -781,8 +847,7 @@ static C_word foo () {
     (push! external-table (cons x res))
     res))
 
-(define (eval* expr)
-  (p (format "eval: ~a" expr))
+(define (eval* expr . decode)
   (cond 
     ((system? expr) expr)
     ((macro? expr)  expr)
@@ -792,16 +857,24 @@ static C_word foo () {
           ((assq f system-syntax)    => (lambda (x) (apply (cdr x) (cdr expr))))
           ((system? f) (apply (cadr f) (map eval* (cdr expr))))
           ((macro? f)  (eval* (apply (cadr f) (cdr expr))))
-          (else (compile-and-eval `(lambda () ,expr))))))
+          (else (let1 val (compile-and-eval `(lambda () ,expr)) 
+            (if (null? decode) val (decode-value val)))))))
     ((symbol? expr) (lookup expr))
     (else expr)))
 
+(define (decode-value val) val) '(
+  (if (and (eval* 'atom?) (not (zero? (eval* `(atom? ,val)))))
+      (cons (decode-value (eval* `(car ,val))) (decode-value (eval* `(cdr ,val))))
+      val))
+
 (import-namespace-to current-namespace (export-to-namespace namespace-function-namespace 'namespace-function))
 (import-namespace-to current-namespace (export-to-namespace macro-namespace      'macro))
-(export-to-namespace alithmatic-namespace 'alithmatic)
+(export-to-namespace arithmetic-namespace 'arithmetic)
 (export-to-namespace machine-namespace    'machine)
 (export-to-namespace builtin-namespace    'builtin)
 (export-to-namespace internal-namespace   'internal)
+(export-to-namespace tag-namespace        'tag)
+(export-to-namespace type-namespace       'type)
 
 (define system-syntax
   `((,sys-define              . ,syntax-define)

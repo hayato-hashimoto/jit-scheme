@@ -1,0 +1,2 @@
+::trans-metaspace function::
+A trans-metaspace function maps an object onto another namespace which respects another [meta:meta|meta namespace]. Since addressing space is accessed via meta namespace, a trans-metaspace function can transfer objects to another [instance of execution] through the network. 

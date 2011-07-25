@@ -1,0 +1,9 @@
+::state::
+
+In general (in computing), state refers the status of the evaluator. State is a mapping, which could be written down as binding list. The state can be obtained and manipulated at the [metalevel].
+
+:notation of state:
+ (name => value)
+ ...
+
+{{Category "notation" "computing model"}}

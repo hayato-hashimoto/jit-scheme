@@ -1,0 +1,20 @@
+<html><head><style><!-- a:link{color: #ee8800;} a:visited{color: #ee4400;} pre{font-size:80%; padding:0.5em; background-color: #eee; border: 1px dashed;}--></style></head><body><p><h1>Tag architecture</h1></p><p>This sections describes the binary architecture of data internally used in jitscheme.
+</p><p>Every object loaded on 64-bit register on JITSCHEME-EXEC has type <a href="type%3ARegister">type:Register</a>, in which bits are interpreted as follows:
+</p><p>Higher N bits are tag, which determine the type of data. Mappings between the tag bits and the <a href="semantic_type">semantic type</a> are configurable at the <a href="metalevel">metalevel</a>. Lower (- 64 N) bits are actual data, which represent either an immediate value (i.e. an integer or a flonum) or a pointer.
+</p><p>As an example, given metalevel <a href="state">state</a>:
+</p><p><pre>(exec:tag:N  => 2)
+(exec:tag:00 => type:())
+(exec:tag:01 => type:Integer)
+(exec:tag:10 => type:Cons) ; equivalent to ([type:Pointer] ([type:FixArray] type:Register 2))
+; (exec:tag:11 is unused)</pre>Scheme expression (1 (2 . 3) 4) will be rendered into type:Register as:
+</p><p><pre>(register:dump => 1000000000000000000000000000000000000000000000000000000000000)
+(address:0000  => 0100000000000000000000000000000000000000000000000000000000001) ; integer 1
+(address:0001  => 1000000000000000000000000000000000000000000000000000000000010) ; cons refering address:0002
+(address:0002  => 1000000000000000000000000000000000000000000000000000000000100) ; cons refering address:0004
+(address:0003  => 1000000000000000000000000000000000000000000000000000000000110) ; cons refering address:0006
+(address:0004  => 0100000000000000000000000000000000000000000000000000000000010) ; integer 2
+(address:0005  => 0100000000000000000000000000000000000000000000000000000000011) ; integer 3
+(address:0006  => 0100000000000000000000000000000000000000000000000000000000100) ; integer 4
+(address:0007  => 0000000000000000000000000000000000000000000000000000000000000) ; null</pre>The representation in type:Register is depended on <a href="meta%3Aaddress">address namespace</a>, thus <a href="trans-metaspace_function">trans-metaspace function</a> must export address namespace appropriately.
+</p><p>{{Category "data structure" "calculation model"}}
+</p></body></html>

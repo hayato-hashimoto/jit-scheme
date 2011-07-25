@@ -1,0 +1,24 @@
+Definitions:
+Expression      := Application | Self-Evaluating | Symbol
+
+Application a
+ where apply :: Expression e, Expression f => (e, f) -> a e f
+
+Self-Evaluating := Atom | Procedure | Macro
+
+Evaluation rules:
+
+eval :: Self-Evaluating -> Self-Evaluating
+eval a = a
+
+eval :: Symbol -> Self-Evaluating
+eval a = lookup a
+
+eval :: Application Macro Expression -> Application
+eval a m e = (m e)
+
+eval :: Application Procedure Expression -> Self-Evaluating
+eval a p a = (p (eval a))
+
+eval :: Application Expression Expression -> Expression
+eval a f r = (eval (apply (eval f) r)

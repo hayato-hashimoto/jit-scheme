@@ -1,0 +1,4 @@
+<html><head><style><!-- a:link{color: #ee8800;} a:visited{color: #ee4400;} pre{font-size:80%; padding:0.5em; background-color: #eee; border: 1px dashed;}--></style></head><body><p><h1>state</h1></p><p>In general (in computing), state refers the status of the evaluator. State is a mapping, which could be written down as binding list. The state can be obtained and manipulated at the <a href="metalevel">metalevel</a>.
+</p><p><h2>notation of state</h2><pre>(name => value)
+...</pre>{{Category "notation" "computing model"}}
+</p></body></html>
