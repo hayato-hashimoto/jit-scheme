@@ -16,7 +16,7 @@ void assign (void *dest, void *src) {
 u_int64_t exec_binary (int len, char *code) {
   char *ptr = heap;
   memcpy (binary, code, len);
-  // printf ("current heap block at %Lx\n", heap);
+  /* printf ("current heap block at %Lx\n", heap); */
   __asm__ volatile (
     "mov %0, %%rbx"
    : 
@@ -58,8 +58,8 @@ u_int32_t binary_address_lower32 () {
 
 void prepare (char* filename) {
   int fd    = open (filename, O_RDWR);
-  binary    = (fd != -1) ? mmap (0, 4096, PROT_READ | PROT_WRITE | PROT_EXEC, MAP_SHARED, fd, 0)
-                         : mmap (0, 4096, PROT_READ | PROT_WRITE | PROT_EXEC, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+  binary    = (fd != -1) ? mmap (0, 8192, PROT_READ | PROT_WRITE | PROT_EXEC, MAP_SHARED, fd, 0)
+                         : mmap (0, 8192, PROT_READ | PROT_WRITE | PROT_EXEC, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
   //printf ("code will be loaded at %Lx\n", binary);
   heap0 = heap = mmap (0, 4096, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
   heap +=10;

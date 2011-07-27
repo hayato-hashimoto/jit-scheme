@@ -91,7 +91,9 @@
   (instruction '(#x23) dest src))
 
 (define (opor dest src)
-  (instruction '(#x0B) dest src))
+  ((integer? src) (instruction/subcode '(#x81) #x01 dest) ,@(enc 8 4 src))
+  ((pair? dest)   (instruction '(#x09) src dest))
+  (else (instruction '(#x0B) dest src)))
 
 (define (opadd dest src)
   (cond
@@ -125,7 +127,7 @@
 
 (define (opmov dest src)
   (cond
-    ((label-symbol? src)   `(,@(rex-prefix 'rax dest) ,(logior #xB8 (regi dest)) ,src))
+    ((label-symbol? src) `(,@(rex-prefix 'rax dest) ,(logior #xB8 (regi dest)) ,src))
     ((and (integer? src) (< #x-80000000 src #x79999999)) `(,@(instruction/subcode '(#xC7) 0 dest) ,@(enc 8 4 src)))
     ((integer? src) `(,@(rex-prefix 'rax dest) ,(logior #xB8 (regi dest)) ,@(enc 8 8 src)))
     ((pair? dest) (instruction '(#x89) src dest))
@@ -746,10 +748,17 @@ static C_word foo () {
   (pointer->address return))
 
 (define-external (system_print (integer n)) void (print n))
- 
+(define dummy2  (foreign-code " return 0;}
+#include \"jit.h\"
+static C_word bar () {
+"))
+
+(define system-print (foreign-code "return C_fix((long) system_print);"))
+(print system_print) 
+(print system-print) 
 (define (export-proc proc)
   (define return (allocate 8))
-  ((foreign-lambda void "assign" c-pointer c-pointer) return proc)
+  ((foreign-lambda void "assign" c-pointer int) return proc)
   (pointer->address return))
 
 (define (make-macro x) `(,macro ,(lambda args (eval* (cons x (encode args))))))
@@ -801,7 +810,7 @@ static C_word foo () {
      (dlopen        . ,sys-dlopen)
      (dlsym         . ,sys-dlsym)
      (display       . ,sys-display)
-     (print         . ,(export-proc system_print))
+     (print         . ,(export-proc system-print))
      (exit          . ,sys-exit )))
 
 (define arithmetic-namespace
@@ -847,7 +856,7 @@ static C_word foo () {
     (push! external-table (cons x res))
     res))
 
-(define (eval* expr . decode)
+(define (eval* expr)
   (cond 
     ((system? expr) expr)
     ((macro? expr)  expr)
@@ -857,12 +866,11 @@ static C_word foo () {
           ((assq f system-syntax)    => (lambda (x) (apply (cdr x) (cdr expr))))
           ((system? f) (apply (cadr f) (map eval* (cdr expr))))
           ((macro? f)  (eval* (apply (cadr f) (cdr expr))))
-          (else (let1 val (compile-and-eval `(lambda () ,expr)) 
-            (if (null? decode) val (decode-value val)))))))
+          (else (compile-and-eval `(lambda () ,expr))))))
     ((symbol? expr) (lookup expr))
     (else expr)))
 
-(define (decode-value val) val) '(
+(define (decode-value val)
   (if (and (eval* 'atom?) (not (zero? (eval* `(atom? ,val)))))
       (cons (decode-value (eval* `(car ,val))) (decode-value (eval* `(cdr ,val))))
       val))
