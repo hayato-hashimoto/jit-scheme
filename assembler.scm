@@ -262,7 +262,7 @@
 
 (define (opmov dest src)
   (cond
-    ((label-symbol? src)   `(,@(rex-prefix 'rax dest) ,(logior #xB8 (regi dest)) ,src))
+    ((label-ref? src)   `(,@(rex-prefix 'rax dest) ,(logior #xB8 (regi dest)) ,src))
     ((and (integer? src) (< #x-80000000 src #x79999999)) `(,@(instruction/subcode '(#xC7) 0 dest) ,@(enc 8 4 src)))
     ((integer? src) `(,@(rex-prefix 'rax dest) ,(logior #xB8 (regi dest)) ,@(enc 8 8 src)))
     ((pair? dest) (instruction '(#x89) src dest))
@@ -274,12 +274,14 @@
 (define (oplea dest src)
   (instruction '(#x8D) dest src))
 
-(define (label-symbol? a)
-  (and (pair? a) (pair? (cdr a)) (eq? (cddr a) 'label)))
-(define (rel-label-symbol? a)
-  (and (pair? a) (pair? (cdr a)) (eq? (cddr a) 'rel-label)))
 (define (label? a)
-  (and (pair? a) (pair? (car a)) (eq? (caar a) 'label)))
+  (and (pair? a) (eq? (car a) 'label)))
+
+(define (label-ref? a)
+  (and (pair? a) (eq? (car a) 'label-ref)))
+
+(define (rel-label-ref? a)
+  (and (pair? a) (eq? (car a) 'rel-label-ref)))
 
 (define (instruction opcode reg r/m)
   `(,@(rex-prefix reg r/m)
@@ -485,17 +487,17 @@
     (let loop ((binary (third code)))
       (for-each (lambda (b)
         (cond 
-          ((label-symbol? b)     (loop (second b)))
-          ((rel-label-symbol? b) (loop (second b)))
+          ((label-ref? b)     (loop (second b)))
+          ((rel-label-ref? b) (loop (second b)))
           ((label? b) (push! table (cons (second b) x)))
           (else (set! x (+ x 1))))) binary))) codes)
   (set! x 0)
   (append-map (lambda (code)
     (append-map (lambda (b)
        (cond
-          ((label-symbol? b)     (set! x (+ x (length (second b)))) ;XXX
+          ((label-ref? b)     (set! x (+ x (length (second b)))) ;XXX
                                  (enc 8 (length (second b)) (p (+ base (p (cdr (assoc (first b) (p table))))))))
-          ((rel-label-symbol? b) (set! x (+ x (length (second b))))
+          ((rel-label-ref? b) (set! x (+ x (length (second b))))
                                  (enc 8 (length (second b)) ((first b) table x base)))
           ((label? b) '())
           (else (set! x (+ x 1)) (list b)))) (third code))) codes))
@@ -524,4 +526,4 @@
   (print-loop x 0)
   (newline))
 
-(repl '() #t)
+;(repl '() #t)
