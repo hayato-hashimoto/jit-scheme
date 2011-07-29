@@ -1,7 +1,9 @@
 (use srfi-1)
 (use srfi-4)
 (use srfi-38)
+(use numbers)
 (use matchable)
+(use format)
 (use lolevel)
 
 (define (p x) x)
@@ -419,9 +421,9 @@
       (match x
         ((index . 'out) (list-ref '(rax rsi rdx rcx r8 r9) index))
         ((index . 'in)  (list-ref '(rdi rsi rdx rcx r8 r9) index))
-        ((index . 'frame-in) (list-ref '(r15 r14 r13) index))
+        ((index . 'frame-in) (list-ref '(r12 r14 r13) index))
         ((index . 'sys) (list-ref '(rsp rbx rbp) index))
-        ((index . 'tmp) (list-ref '(r10 r11 r12) index))
+        ((index . 'tmp) (list-ref '(r10 r11) index))
         ((x . y) (cons (car (loop (list x))) y))
         (x x))) a))))
 
@@ -520,8 +522,10 @@
     (if (null? x) #t
       (begin 
         (if (and (not (zero? i)) (zero? (bitwise-and i #xf))) (newline))
-        (if (zero? (bitwise-and i #xf)) (display (format "~x:" i)))
-        (if (integer? (car x)) (display (format " ~x" (car x))) (display (car x)))
+        (if (zero? (bitwise-and i #xf)) (display (format "~6,48,0X:" i)))
+        (cond ((integer? (car x)) (display (format " ~2,48,0X" (car x))))
+              ((label? (car x)) (newline) (display (format "~6,48,0X ~a:" i (cadar x))))
+              (else (display (format " ~a" (car x)))))
         (print-loop (cdr x) (+ 1 i)))))
   (print-loop x 0)
   (newline))

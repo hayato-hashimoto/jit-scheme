@@ -2,8 +2,10 @@
 (use srfi-4)
 (use srfi-38)
 (use matchable)
+(use numbers)
 (use lolevel)
 
+(define test 88)
 (define type '(! type))
 (define type-namespace `(
   (int_62    . (,type int_62))
@@ -74,8 +76,9 @@
       (set! counter (+ 1 counter))
        counter)))
 
-(define (pa x) (display "a:") (print x) x)
-(define (pb x) (display "b:") (print x) x)
+(define (eq$ x) (cut eq? <> x))
+(define (pa x)  (display "a:") (print (format "~x" x)) x)
+(define (pb x)  (display "b:") (print (format "~x" x)) x)
 (define (p x) x)
 (define (p-i x) x)
 (define (px x) x)
@@ -124,6 +127,7 @@
               ,(map loop (filter (lambda (x) (any (cut eq? <> x) (free-vars s))) vars))
               (,(car p) . procedure))))
       (('if p t f) `((if . syntax) ,(loop p) ,(loop t) ,(loop f)))
+      (('quote expr) (encode-value expr))
       ((s ...) (map loop s))
       ((? (cut element? <> heap))  `(,s . heap))
       ((? (cut element? <> stack)) `(,s . stack))
@@ -175,12 +179,6 @@
 
 ; compile tagged to vm
 (define (compile-to-vm s)
-  (define (%compile-to-vm-pred a)
-    (p a)
-    (cond
-      ((and (pair? a) (eq? builtin-gt (car a))) 'g)
-      ((and (pair? a) (eq? builtin-eq (car a))) 'z)
-      (else 'cmpz)))
   (define (%compile-to-vm c j)
     (match c
      (('(lambda . syntax) (args ...) body ...) `(
@@ -216,18 +214,6 @@
        ((<- . syntax) ((,j 1) . stack) (0 . out))
        ,@(%compile-to-vm arg3 (+ j 1))
        (tri ((,j 0) . stack) ((,j 1) . stack) (0 . out))))
-     (('(builtin cons) arg1 arg2) `(
-       ,@(%compile-to-vm arg1 (+ j 1))
-       ((<- . syntax) ((,j 0) . stack) (0 . out))
-       ,@(%compile-to-vm arg2 (+ j 1))
-       (cons ((,j 0) . stack) (0 . out))))
-     (('(builtin tri) arg1 arg2 arg3) `(
-       ,@(%compile-to-vm arg1 (+ j 1))
-       ((<- . syntax) ((,j 0) . stack) (0 . out))
-       ,@(%compile-to-vm arg2 (+ j 1))
-       ((<- . syntax) ((,j 1) . stack) (0 . out))
-       ,@(%compile-to-vm arg3 (+ j 1))
-       (tri ((,j 0) . stack) ((,j 1) . stack) (0 . out))))
      (('(builtin +) arg1 arg2) `(
        ,@(%compile-to-vm arg1 (+ j 1))
        ((<- . syntax) ((,j 0) . stack) (0 . out))
@@ -248,6 +234,11 @@
        ((<- . syntax) ((,j 0) . stack) (0 . out))
        ,@(%compile-to-vm arg1 (+ j 1))
        (and (0 . out) ((,j 0) . stack))))
+     (('(builtin xor) arg1 arg2) `(
+       ,@(%compile-to-vm arg2 (+ j 1))
+       ((<- . syntax) ((,j 0) . stack) (0 . out))
+       ,@(%compile-to-vm arg1 (+ j 1))
+       (xor (0 . out) ((,j 0) . stack))))
      (('(builtin ior) arg1 arg2) `(
        ,@(%compile-to-vm arg2 (+ j 1))
        ((<- . syntax) ((,j 0) . stack) (0 . out))
@@ -257,19 +248,20 @@
        ,@(%compile-to-vm arg2 (+ j 1))
        ((<- . syntax) ((,j 0) . stack) (0 . out))
        ,@(%compile-to-vm arg1 (+ j 1))
-       (cmp (0 . out) ((,j 0) . stack))))
+       (cmp (0 . out) ((,j 0) . stack))
+       (movflag g)))
      (('(builtin =) arg1 arg2) `(
        ,@(%compile-to-vm arg2 (+ j 1))
        ((<- . syntax) ((,j 0) . stack) (0 . out))
        ,@(%compile-to-vm arg1 (+ j 1))
        (cmp (0 . out) ((,j 0) . stack))))
+     (('(builtin not) arg1) `(
+       ,@(%compile-to-vm arg1 (+ j 1))
+       (not)))
      (('(if . syntax) pred true-case false-case) (let* ((i (genid)) (ii (genid))) `(
         ,@(%compile-to-vm pred j)
         ,@(let1 label1 `(rel-label-ref ,(lambda (table self base) (- (px (cdr (assq i table))) (p self))) (0 0 0 0))
-          (case (%compile-to-vm-pred pred)
-            ((cmpz) `((cmp (0 . out) 0) (jnz ,label1)))
-            ((z)    `((jnz ,label1)))
-            ((g)    `((jng ,label1)))))
+            `((jnz ,label1)))
         ,@(%compile-to-vm true-case j)
         (jmp (rel-label-ref ,(lambda (table self base) (- (px (cdr (assq ii table))) (p self))) (0 0 0 0)))
         (label ,i)
@@ -421,6 +413,22 @@
          (mov (- (1 . sys) ,(* 2 size-of-ptr)) (0 . out))
 ; return
          (mov (0 . out) (1 . sys))))
+      (('string str) `(
+         (add (1 . sys) ,(align 8 (string-length str)))
+         ,@(let loop ((i (floor (/ (string-length str) 8))) (s str))
+           `((mov (0 . out) ,(task8 str))
+             (mov (- (1 . sys) ,(* i size-of-ptr)) (0 . out))
+             ,@(if (= 0 i) '() (loop (- i 1) (drop8 str)))))
+         (mov (0 . out) #x0400000000000000)
+         (ior (0 . out) (1 . sys))))
+      (('not) `(
+         (setz al)
+         (test al 1)))
+      (('movflag src)
+        (case src
+          ((g)  '((setng al)   (test al 1)))
+          ((le) '((setg al) (test al 1)))
+          ((c)  '((setnc al)   (test al 1)))))
       (('(<- . syntax) dest src) `((mov ,dest ,src)))
       (('(call . syntax) proc) `(
          (push (0 . frame-in))
@@ -451,19 +459,6 @@
           '((pop  (2 . sys))))
       (ret))))))
 
-(define (render-register c)
-  (list (first c)
-    (let loop ((a (second c)))
-    (tree-walk map (lambda (x)
-      (match x
-        ((index . 'out) (list-ref '(rax rsi rdx rcx r8 r9) index))
-        ((index . 'in)  (list-ref '(rdi rsi rdx rcx r8 r9) index))
-        ((index . 'frame-in) (list-ref '(r15 r14 r13) index))
-        ((index . 'sys) (list-ref '(rsp rbx rbp) index))
-        ((index . 'tmp) (list-ref '(r10 r11 r12) index))
-        ((x . y) (cons (car (loop (list x))) y))
-        (x x))) a))))
-
 (define (link-label base codes)
   (define table '())
   (define x 0)
@@ -493,17 +488,13 @@
 (define (compile-and-eval expr)
   (define c (map-second (cut append-map compile-to-binary <>) (p-i (map render-register (map compile-to-assembly (p-i (map compile-to-vm (compile-to-tagged expr))))))))
   (define b (list->u8vector (link-label (binary-address) c)))
-  (define a ((foreign-lambda unsigned-long "exec_binary" integer u8vector) (u8vector-length b) b))
-  (define r 
-  (+ (ash (px (modulo ((foreign-lambda integer "fetch_result_higher32")) #x100000000)) 32)
-          (px (modulo ((foreign-lambda integer "fetch_result_lower32"))  #x100000000))))
-  r)
-
+  (define a ((foreign-safe-lambda unsigned-long "exec_binary" integer u8vector) (u8vector-length b) b))
+  (channel))
 
 ; Due to poor support of 64-bit variables in chicken scheme ...
 (define (binary-address)
-  (+ (ash (modulo ((foreign-lambda integer "binary_address_higher32")) #x100000000) 32)
-     (modulo ((foreign-lambda integer "binary_address_lower32"))  #x100000000)))
+  (+ (ash (modulo ((foreign-safe-lambda integer "binary_address_higher32")) #x100000000) 32)
+     (modulo ((foreign-safe-lambda integer "binary_address_lower32"))  #x100000000)))
 
 (define (repl)
   (define expr   #f)
@@ -515,10 +506,9 @@
   (cond
     ((number? result) (display (format " => ~a (0x~x)\n" result result)))
     ((any (cut eq? <> result) namespaces) (display (format " => #<namespace>\n")))
-    ((pair? result) (display (format " => ~a\n" (with-output-to-string (lambda () (write/ss result))))))
-    (else          (display (format " => ~a\n" result))))
+    ((pair? result)  (display (format " => ~a\n" (with-output-to-string (lambda () (write/ss result))))))
+    (else            (display (format " => ~a\n" result))))
   (repl))
-
 
 (define (add-to-namespace name value)
   (push! (car current-namespace) (cons name value)))
@@ -549,21 +539,48 @@ static C_word foo () {
   (define return (allocate 8))
   (define-external x c-pointer)
   (set! x ((foreign-lambda c-pointer "dlsym" c-pointer c-string) handle str))
-  ((foreign-lambda void "assign" c-pointer c-pointer) return x)
+  ((foreign-safe-lambda void "assign" c-pointer c-pointer) return x)
   (pointer->address return))
 
-(define-external (system_print (integer n)) void (print n))
+
+(define channel
+  (let1 value 0
+    (lambda x 
+      (if (null? x)
+        value
+        (set! value (car x))))))
+
+(define-external (Chicken_to_C_higher32) unsigned-int
+  (ash (channel) -32))
+
+(define-external (Chicken_to_C_lower32) unsigned-int
+  (bitwise-and (channel) #xffffffff))
+
+(define-external (C_to_Chicken_higher32 (unsigned-int h)) void
+  (channel (bitwise-and (channel) #x00000000ffffffff))
+  (channel (bitwise-ior (channel) (ash h 32))))
+
+(define-external (C_to_Chicken_lower32 (unsigned-int l)) void
+  (channel (bitwise-and (channel) #xffffffff00000000))
+  (channel (bitwise-ior (channel) l)))
+
+(define-external (system_eval) void
+  (channel (encode-value (eval (decode-value (channel))))))
+
+(define-external (system_print (integer n)) void 
+  (print (decode-value n)))
+
 (define dummy2  (foreign-code " return 0;}
 #include \"jit.h\"
 static C_word bar () {
 "))
 
 (define system-print (foreign-code "return C_fix((long) system_print);"))
-(print system_print) 
-(print system-print) 
+(define system-eval  (foreign-code "return C_fix((long) exec_eval);"))
+
 (define (export-proc proc)
   (define return (allocate 8))
-  ((foreign-lambda void "assign" c-pointer int) return proc)
+  ((foreign-safe-lambda void "assign" c-pointer int) return proc)
   (pointer->address return))
 
 (define (make-macro x) `(,macro ,(lambda args (eval* (cons x (encode args))))))
@@ -594,6 +611,8 @@ static C_word bar () {
 (define builtin-gt          '(builtin >))
 (define builtin-and         '(builtin and))
 (define builtin-ior         '(builtin ior))
+(define builtin-xor         '(builtin xor))
+(define builtin-not         '(builtin not))
 (define builtin-read        '(builtin read))
 (define builtin-write       '(builtin write))
 (define builtin-cons        '(builtin cons))
@@ -616,6 +635,7 @@ static C_word bar () {
      (dlsym         . ,sys-dlsym)
      (display       . ,sys-display)
      (print         . ,(export-proc system-print))
+     (meta-eval     . ,(export-proc system-eval))
      (exit          . ,sys-exit )))
 
 (define arithmetic-namespace
@@ -625,6 +645,8 @@ static C_word bar () {
     (/ . ,builtin-div)
     (and . ,builtin-and) 
     (ior . ,builtin-ior) 
+    (xor . ,builtin-xor) 
+    (not . ,builtin-not)
     (= . ,builtin-eq) 
     (> . ,builtin-gt)))
 
@@ -675,10 +697,46 @@ static C_word bar () {
     ((symbol? expr) (lookup expr))
     (else expr)))
 
+(define (@pair? x)
+  (= (bitwise-and #xff0000000000000 x) #x0100000000000000))
+(define (@null? x)
+  (= (symbol->integer '()) x))
+(define (@integer? x)
+  (= (bitwise-and #xff0000000000000 x) #x0000000000000000))
+(define (@symbol? x)
+  (= (bitwise-and #xff0000000000000 x) #x0800000000000000))
+
 (define (decode-value val)
-  (if (and (eval* 'atom?) (not (zero? (eval* `(atom? ,val)))))
-      (cons (decode-value (eval* `(car ,val))) (decode-value (eval* `(cdr ,val))))
-      val))
+  (cond 
+    ((@pair? val)
+        (cons (decode-value (eval* `(car ,val))) (decode-value (eval* `(cdr ,val)))))
+    ((@null? val) '())
+    ((@integer? val) val)
+    ((@symbol? val) (integer->symbol val))
+    (else 'unknown-object)))
+
+(define (encode-value val)
+  (cond 
+    ((pair? val) (eval* `(cons ,(encode-value (car val)) ,(encode-value (cdr val)))))
+    ((null? val) (symbol->integer '()))
+    ((integer? val) val)
+    ((symbol? val) (symbol->integer val))
+    (else (encode-value 'not-available))))
+
+(define exported-symbols '())
+
+(define (symbol->integer x)
+  (bitwise-ior #x0800000000000000
+    (if (any (eq$ x) exported-symbols)
+      (- (length exported-symbols) (list-index (eq$ x) exported-symbols) 1)
+      (begin
+        (push! exported-symbols x)
+        (- (length exported-symbols) 1)))))
+
+(symbol->integer '())
+
+(define (integer->symbol integer)
+  (list-ref exported-symbols (- (length exported-symbols) (bitwise-and #x00ffffffffffffff integer) 1)))
 
 (import-namespace-to current-namespace (export-to-namespace namespace-function-namespace 'namespace-function))
 (import-namespace-to current-namespace (export-to-namespace macro-namespace      'macro))
